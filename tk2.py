@@ -1,6 +1,7 @@
 from tkinter import *
-
 window = Tk()
+
+# Window Widgets
 window.geometry("500x300")
 window.title("Transmit message")
 
@@ -13,7 +14,7 @@ def exit1():
     exit()
 
 
-fn = long()
+fn = int()
 Ln = hex(23)
 st = IntVar()
 do = IntVar()
@@ -25,25 +26,35 @@ hp = IntVar()
 Vp = IntVar()
 ar= IntVar()
 
-
+# ID:(hex)
 label1 = Label(window, text="ID:(hex)", font=("arial", 9, "bold"))
 label1.grid(row=1, column=1)
+
+# Lenght
 label2 = Label(window, text="Lenght:", font=("arial", 9, "bold"))
 label2.place(x=180, y=0)
+
+# Date: (hex)
 label3 = Label(window, text="Data:(hex)", font=("arial", 9, "bold"))
 label3.place(x=300, y=0)
+
+# Cycle time
 label4 = Label(window, text="cycle time", font=("arial", 9, "bold"))
 label4.place(x=0, y=40)
 label5 = Label(window, text="ms", font=("arial", 6, "bold"))
 label5.place(x=80, y=60)
 
+# Message Type
 check1 = Checkbutton(window, text="send extended ", font=("arial", 9, "bold"))
 check1.place(x=200, y=40)
 check2 = Checkbutton(window, text="send ", font=("arial", 9, "bold"))
 check2.place(x=200, y=60)
 
+# Send Button
 b1 = Button(window, text="send", width=12, bg='white', fg='black', command=printt())
 b1.place(x=150, y=200)
+
+# Cancel Button
 b2 = Button(window, text="cancel", width=12, bg='white', fg='black', command=printt())
 b2.place(x=280, y=200)
 
@@ -73,3 +84,4 @@ entry_11=Entry(textvar=ar,width=10)
 entry_11.place(x=0,y=60)
 
 window.mainloop()
+
