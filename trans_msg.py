@@ -1,15 +1,33 @@
+from __future__ import print_function
 from tkinter import *
 import tkinter.messagebox as msg
+import can
 
 window = Tk()
+
+def send_msg():
+    ID = ID_input.get()
+    Lenght = Lenght_input.get()
+    Cycle_time = Cycle_time_input.get()
+    Data = Data1_input.get()+Data2_input.get()+Data3_input.get()+Data4_input.get()+Data5_input.get()+Data6_input.get()+Data7_input.get()+Data8_input.get()
+
+    bus = can.interface.Bus(bustype='vector',app_name=None , channel=0, bitrate=500000)
+    msg = can.Message(arbitration_id=ID,
+                      data=[0x02,0x11,0x02,0x00 ,0x00 ,0x00, 0x00, 0x00],dlc=3,
+                      extended_id=False)
+    try:
+        bus.send(msg)
+        print("Message sent on {}".format(bus.channel_info))
+    except can.CanError:
+        print("Message NOT sent")
 
 def show_answer():
     ID = ID_input.get()
     Lenght = Lenght_input.get()
     Cycle_time = Cycle_time_input.get()
     Data = Data1_input.get()+Data2_input.get()+Data3_input.get()+Data4_input.get()+Data5_input.get()+Data6_input.get()+Data7_input.get()+Data8_input.get()
-    msg.showinfo(title=None, 
-                message="You send:\nID: '"+ID+"'\nLenght: '"+Lenght+"'\nCycle time: '"+Cycle_time+"'\nData: '"+Data+"'")
+    msg.showinfo(title=None,
+    message="You send:\nID: '"+ID+"'\nLenght: '"+Lenght+"'\nCycle time: '"+Cycle_time+"'\nData: '"+Data+"'")
 
 # ID:(hex)
 Label(window, text = "ID:(hex)", font=("arial", 9, "bold")).grid(row=0, column=0)
@@ -51,7 +69,7 @@ Checkbutton(window, text="send extended ", font=("arial", 9, "bold")).place(x=20
 Checkbutton(window, text="send ", font=("arial", 9, "bold")).place(x=200, y=60)
 
 # Buttons
-Button(window, text='Send', command=show_answer).place(x=150, y=200)
+Button(window, text='Send', command=send_msg).place(x=150, y=200)
 Button(window, text='Cancel', command=window.destroy).place(x=280, y=200)
 
 # Window Widgets
